@@ -4,12 +4,12 @@ services:
   ws1:
     image: nginx:stable-alpine3.17-slim
     volumes:
-      - ./ws1:/var/www/public
-      - ./nginx:/etc/nginx/conf.d/
+      - ./ws1:/var/www/public:z
+      - ./nginx:/etc/nginx/conf.d:z
     restart: unless-stopped
     ports:
       - "$FIRST_PORT:80"
-    container_name: simple_ssl_html
+    container_name: ws1
     networks:
       network:
         ipv4_address: $FIRST_HOST
@@ -17,12 +17,12 @@ services:
   ws2:
     image: nginx:stable-alpine3.17-slim
     volumes:
-      - ./ws2:/var/www/public
-      - ./nginx:/etc/nginx/conf.d/
+      - ./ws2:/var/www/public:z
+      - ./nginx:/etc/nginx/conf.d:z
     restart: unless-stopped
     ports:
       - "$SECND_PORT:80"
-    container_name: simple_ssl_html
+    container_name: ws2
     networks:
       network:
         ipv4_address: $SECND_HOST
@@ -30,12 +30,12 @@ services:
   ws3:
     image: nginx:stable-alpine3.17-slim
     volumes:
-      - ./ws3:/var/www/public
-      - ./nginx:/etc/nginx/conf.d/
+      - ./ws3:/var/www/public:z
+      - ./nginx:/etc/nginx/conf.d:z
     restart: unless-stopped
     ports:
       - "$THIRD_PORT:80"
-    container_name: simple_ssl_html
+    container_name: ws3
     networks:
       network:
         ipv4_address: $THIRD_HOST
