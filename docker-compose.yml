@@ -40,6 +40,18 @@ services:
       network:
         ipv4_address: $THIRD_HOST
 
+  blc:
+    image: haproxy:lts-alpine3.17
+    volumes:
+      - ./haproxy:/usr/local/etc/haproxy:z
+    restart: unless-stopped
+    ports:
+      - "$BLNCR_PORT:80"
+    container_name: blc
+    networks:
+      network:
+        ipv4_address: $THIRD_HOST
+
 networks:
   network:
     driver: bridge
