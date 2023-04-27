@@ -34,8 +34,7 @@ help:
 
 build:
 	@printf "$(OK_COLOR)==== Building configuration ${name}... ====$(NO_COLOR)\n"
-	@bash scripts/build.sh
-	# @docker-compose -f ./docker-compose.yml up -d --build
+	@docker-compose -f ./docker-compose.yml up -d --build
 
 conn:
 	@printf "$(OK_COLOR)==== Connecting to container ${name}... ====$(NO_COLOR)\n"
@@ -63,7 +62,7 @@ re:	down
 
 clean: down
 	@printf "$(ERROR_COLOR)==== Cleaning configuration ${name}... ====$(NO_COLOR)\n"
-	@docker system prune --a
+	@yes | docker system prune -a
 
 fclean:
 	@printf "$(ERROR_COLOR)==== Total clean of all configurations docker ====$(NO_COLOR)\n"
