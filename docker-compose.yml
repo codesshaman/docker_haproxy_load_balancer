@@ -47,6 +47,7 @@ services:
     restart: unless-stopped
     ports:
       - "$BLNCR_PORT:80"
+      - "$BLNCR_ADMN:89"
     container_name: blc
     networks:
       network:
