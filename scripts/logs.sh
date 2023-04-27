@@ -1,0 +1,3 @@
+#!/bin/bash
+NAME="$(grep "BLNCR_NAME" .env | sed -r 's/.{,11}//')"
+docker logs $NAME

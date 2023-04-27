@@ -1,13 +1,49 @@
 version: '3'
 
 services:
-  nginx:
-    image: nginx:stable-alpine
+  ws1:
+    image: nginx:stable-alpine3.17-slim
     volumes:
-      - ./public:/var/www/public
-      - ./nginx/conf.d:/etc/nginx/conf.d/
-      - ./nginx/ssl:/etc/nginx/ssl/
+      - ./ws1:/var/www/public
+      - ./nginx:/etc/nginx/conf.d/
     restart: unless-stopped
     ports:
-      - "80:80"
+      - "$FIRST_PORT:80"
     container_name: simple_ssl_html
+    networks:
+      network:
+        ipv4_address: $FIRST_HOST
+
+  ws2:
+    image: nginx:stable-alpine3.17-slim
+    volumes:
+      - ./ws2:/var/www/public
+      - ./nginx:/etc/nginx/conf.d/
+    restart: unless-stopped
+    ports:
+      - "$SECND_PORT:80"
+    container_name: simple_ssl_html
+    networks:
+      network:
+        ipv4_address: $SECND_HOST
+
+  ws3:
+    image: nginx:stable-alpine3.17-slim
+    volumes:
+      - ./ws3:/var/www/public
+      - ./nginx:/etc/nginx/conf.d/
+    restart: unless-stopped
+    ports:
+      - "$THIRD_PORT:80"
+    container_name: simple_ssl_html
+    networks:
+      network:
+        ipv4_address: $THIRD_HOST
+
+networks:
+  network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: $NETWK_ADDR
+          gateway: $NETWK_GATE
